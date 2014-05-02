@@ -19,10 +19,10 @@ public class SneakEnemyPatrol : SneakEnemyBase {
 	void OnDrawGizmosSelected() {
 		Gizmos.color = Color.red;
 		Vector2 left = new Vector2(leftBorder, transform.position.y);
-		Gizmos.DrawLine(left+Vector2.up*10f, left-Vector2.up*10f);
+		Gizmos.DrawLine(left+Vector2.up*2f, left-Vector2.up*2f);
 
 		Gizmos.color = Color.blue;
 		Vector2 right = new Vector2(rightBorder, transform.position.y);
-		Gizmos.DrawLine(right+Vector2.up*10f, right-Vector2.up*10f);
+		Gizmos.DrawLine(right+Vector2.up*2f, right-Vector2.up*2f);
 	}
 }

@@ -5636,8 +5636,8 @@ MonoBehaviour:
   current: 0
   health: 100
   walkSpeed: 150
-  leftBorder: 4.09000015
-  rightBorder: 20.3700008
+  leftBorder: 4.30000019
+  rightBorder: 19.8999996
 --- !u!212 &1967018873
 SpriteRenderer:
   m_ObjectHideFlags: 0

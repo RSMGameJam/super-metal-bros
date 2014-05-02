@@ -8,7 +8,8 @@ public class SneakEnemyBase : MonoBehaviour {
 	public enum EnemyStates {
 		Patrol,
 		Detected,
-		Hit
+		Hit,
+		Dying
 	}
 
 	public EnemyStates current = EnemyStates.Patrol;
@@ -17,6 +18,14 @@ public class SneakEnemyBase : MonoBehaviour {
 	public float walkSpeed;
 
 	public PatrolMission patrolMission;
+
+	public void Die() {
+
+	}
+
+	public void Kill() {
+
+	}
 
 	public void Update() {
 		switch(current) {
