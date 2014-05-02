@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
-public class SneakEnemyBase : StateMachineBehaviourEx {
+public class SneakEnemyBase : MonoBehaviour {
 
 	public enum EnemyStates {
 		Patrol,
@@ -11,35 +11,33 @@ public class SneakEnemyBase : StateMachineBehaviourEx {
 		Hit
 	}
 
-	public float health;
+	public EnemyStates current = EnemyStates.Patrol;
+
+	public float health = 100f;
 	public float walkSpeed;
 
-	public MissionBase mission;
+	public PatrolMission patrolMission;
 
-	protected override void OnAwake() {
-		
-	}
+	public void Update() {
+		switch(current) {
+			case EnemyStates.Detected:
 
-	IEnumerator Patrol_EnterState() {
-		Debug.Log("ENTERUUUU");
-		health = 100f;
-		yield return null;
-	}
+				break;
 
-	IEnumerator Patrol_Update() {
-		Debug.Log("PATROL UPDATE");
-		// Update mission
-		mission.UpdateMission();
+			case EnemyStates.Hit:
 
-		// Is player in sight?
+				break;
 
-		// Player detected
+			case EnemyStates.Patrol:
+				// Update mission
+				patrolMission.UpdateMission();
 
-		// If not, patrol
-		yield return null;
-	}
+				// Is player in sight?
 
-	IEnumerator Patrol_ExitState() {
-		yield return null;
+				// Player detected
+
+				// If not, patrol
+				break;
+		}
 	}
 }

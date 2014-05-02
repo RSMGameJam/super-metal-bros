@@ -9,10 +9,9 @@ public class MissionBase {
 	public Action OnFinished;
 
 	public bool UpdateMission() {
-		Debug.Log("ÖSAKJDKASF");
 		if(CheckFinished.Invoke())
 		{
-			OnFinished.Invoke();
+			if(OnFinished != null) OnFinished.Invoke();
 			return true;
 		}
 		else

@@ -26,7 +26,6 @@ public class PatrolMission : MissionBase {
 				return true;
 			}
 			else {
-				Debug.Log("WALKING");
 				WalkTowardsTarget();
 				return false;
 			}
@@ -34,9 +33,9 @@ public class PatrolMission : MissionBase {
 	}
 
 	private void WalkTowardsTarget() {
-		float direction = ((target - (Vector2)enemy.transform.position).sqrMagnitude < 0f ? -1f : 1f);
-		enemy.rigidbody2D.velocity += new Vector2(enemy.walkSpeed * Time.deltaTime * direction, enemy.rigidbody2D.velocity.y);
-		Debug.Log("New velocity: " + (enemy.walkSpeed * Time.deltaTime * direction));
+		float direction = ((target - (Vector2)enemy.transform.position).sqrMagnitude < 0f ? 1f : -1f);
+		enemy.rigidbody2D.velocity = new Vector2(enemy.walkSpeed * Time.deltaTime * direction, enemy.rigidbody2D.velocity.y);
+		//Debug.Log("New velocity: " + (enemy.walkSpeed * Time.deltaTime * direction));
 	}
 
 	private Vector2 RandomizeNewTarget() {
