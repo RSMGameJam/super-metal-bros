@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SneakEnemy : SneakEnemyBase {
+public class SneakEnemyPatrol : SneakEnemyBase {
 
 	protected override void OnAwake() {
-		base.OnAwake();
+		currentState = EnemyStates.Patrol;
 
+		base.OnAwake();
+		
 		mission = new PatrolMission(this);
 	}
 }

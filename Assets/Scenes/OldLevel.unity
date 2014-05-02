@@ -5646,6 +5646,7 @@ MonoBehaviour:
   stateMachine: {fileID: 0}
   lastStateMachineBehaviour: {fileID: 0}
   health: 100
+  walkSpeed: 10
 --- !u!212 &1967018873
 SpriteRenderer:
   m_ObjectHideFlags: 0

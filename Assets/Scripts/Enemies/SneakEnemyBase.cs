@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class SneakEnemyBase : StateMachineBehaviourEx {
 
 	public enum EnemyStates {
@@ -12,20 +14,22 @@ public class SneakEnemyBase : StateMachineBehaviourEx {
 	public float health;
 	public float walkSpeed;
 
-	[SerializeField]public MissionBase mission;
+	public MissionBase mission;
 
 	protected override void OnAwake() {
 		
 	}
 
 	IEnumerator Patrol_EnterState() {
+		Debug.Log("ENTERUUUU");
 		health = 100f;
 		yield return null;
 	}
 
 	IEnumerator Patrol_Update() {
+		Debug.Log("PATROL UPDATE");
 		// Update mission
-		mission.Update();
+		mission.UpdateMission();
 
 		// Is player in sight?
 

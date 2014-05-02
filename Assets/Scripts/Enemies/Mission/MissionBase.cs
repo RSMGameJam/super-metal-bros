@@ -8,7 +8,8 @@ public class MissionBase {
 	public Func<bool> CheckFinished;
 	public Action OnFinished;
 
-	public bool Update() {
+	public bool UpdateMission() {
+		Debug.Log("ÖSAKJDKASF");
 		if(CheckFinished.Invoke())
 		{
 			OnFinished.Invoke();
