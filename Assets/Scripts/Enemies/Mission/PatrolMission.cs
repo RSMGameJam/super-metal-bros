@@ -2,52 +2,50 @@
 using System.Collections;
 using System;
 
-[Serializable]
 public class PatrolMission : MissionBase {
 
-	const float CLOSE_ENOUGH = 0.5f;
-	const float MAX_DISTANCE = 10f;
+	const float CLOSE_ENOUGH = 1f;
+	//const float MAX_DISTANCE = 10f;
 
 	public SneakEnemyPatrol enemy;
 	public Vector2 target;
+
+	float lastDistance = 100000f;
 
 	public PatrolMission(SneakEnemyPatrol pEnemy) {
 		enemy = pEnemy;
 		target = RandomizeNewTarget();
 
 		CheckFinished = () => {
-			if(Vector2.Distance(enemy.transform.position, target) < CLOSE_ENOUGH) {
-				Debug.Log("CLOSE ENOUGH");
-				enemy.transform.position = target;
+			float distance = Vector2.Distance(enemy.transform.position, target);
+			if(distance < CLOSE_ENOUGH || distance > lastDistance) {
+				enemy.transform.position = new Vector2(target.x, enemy.transform.position.y);
 
 				// Randomize new target
 				target = RandomizeNewTarget();
 
+				lastDistance = 100000f;
 				return true;
 			}
 			else {
 				WalkTowardsTarget();
+				lastDistance = distance;
 				return false;
 			}
 		};
 	}
 
 	private void WalkTowardsTarget() {
-		float direction = ((target - (Vector2)enemy.transform.position).sqrMagnitude < 0f ? 1f : -1f);
+		float direction = (target.x > enemy.transform.position.x ? 1f : -1f);
 		enemy.rigidbody2D.velocity = new Vector2(enemy.walkSpeed * Time.deltaTime * direction, enemy.rigidbody2D.velocity.y);
 		//Debug.Log("New velocity: " + (enemy.walkSpeed * Time.deltaTime * direction));
 	}
 
 	private Vector2 RandomizeNewTarget() {
-		if(target == default(Vector2))
-			target = enemy.transform.position;
+		Vector2 newTarget = enemy.transform.position;
+		newTarget.x = UnityEngine.Random.Range(enemy.leftBorder, enemy.rightBorder);
 
-		Vector2 newTarget = target;
-		RaycastHit2D hit;
-		do {
-			newTarget.x = newTarget.x + UnityEngine.Random.Range(-MAX_DISTANCE, MAX_DISTANCE);
-			hit = Physics2D.Raycast(newTarget, -enemy.transform.up);
-		} while(hit.collider == null && Vector2.Distance(target, hit.point) > 1f);
+		enemy.transform.localScale = new Vector3(newTarget.x < enemy.transform.position.x ? -1f : 1f, enemy.transform.localScale.y, enemy.transform.localScale.z);
 
 		return newTarget;
 	}
