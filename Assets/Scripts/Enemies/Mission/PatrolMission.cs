@@ -4,9 +4,6 @@ using System;
 
 public class PatrolMission : MissionBase {
 
-	const float CLOSE_ENOUGH = 1f;
-	//const float MAX_DISTANCE = 10f;
-
 	public SneakEnemyPatrol enemy;
 	public Vector2 target;
 
@@ -18,7 +15,7 @@ public class PatrolMission : MissionBase {
 
 		CheckFinished = () => {
 			float distance = Vector2.Distance(enemy.transform.position, target);
-			if(distance < CLOSE_ENOUGH || distance > lastDistance) {
+			if(distance > lastDistance) {
 				enemy.transform.position = new Vector2(target.x, enemy.transform.position.y);
 
 				// Randomize new target

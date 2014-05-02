@@ -9,7 +9,7 @@ public class MissionBase {
 	public Action OnFinished;
 
 	public bool UpdateMission() {
-		if(CheckFinished.Invoke())
+		if(CheckFinished != null && CheckFinished.Invoke())
 		{
 			if(OnFinished != null) OnFinished.Invoke();
 			return true;
