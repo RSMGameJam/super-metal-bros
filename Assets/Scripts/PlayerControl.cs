@@ -16,6 +16,7 @@ public class PlayerControl : MonoBehaviour
 	public AudioClip[] taunts;				// Array of clips for when the player taunts.
 	public float tauntProbability = 50f;	// Chance of a taunt happening.
 	public float tauntDelay = 1f;			// Delay for when the taunt should happen.
+	public Knife Knife;
 
 
 	private int tauntIndex;					// The index of the taunts array indicating the most recent taunt.
@@ -23,12 +24,14 @@ public class PlayerControl : MonoBehaviour
 	private bool grounded = false;			// Whether or not the player is grounded.
 	private Animator anim;					// Reference to the player's animator component.
 
+	private string _playerId;
 
 	void Awake()
 	{
 		// Setting up references.
 		groundCheck = transform.Find("groundCheck");
 		anim = GetComponent<Animator>();
+		_playerId = this.GetComponent<Player>().PlayerId.ToString();
 	}
 
 
@@ -38,7 +41,7 @@ public class PlayerControl : MonoBehaviour
 		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
 
 		// If the jump button is pressed and the player is grounded then the player should jump.
-		if(Input.GetButtonDown("Jump1") && grounded)
+		if(Input.GetButtonDown("Jump"+_playerId) && grounded)
 			jump = true;
 	}
 
@@ -46,7 +49,7 @@ public class PlayerControl : MonoBehaviour
 	void FixedUpdate ()
 	{
 		// Cache the horizontal input.
-		float h = Input.GetAxis("Horizontal1");
+		float h = Input.GetAxis("Horizontal"+_playerId);
 
 		// The Speed animator parameter is set to the absolute value of the horizontal input.
 		anim.SetFloat("Speed", Mathf.Abs(h));
@@ -86,9 +89,14 @@ public class PlayerControl : MonoBehaviour
 			// Make sure the player can't jump again until the jump conditions from Update are satisfied.
 			jump = false;
 		}
+
+		if (Input.GetButtonDown("Action"+_playerId) && Knife.KnifeTarget != null) {
+			GameObject.Destroy(Knife.KnifeTarget);
+		}
+
 	}
-	
-	
+
+
 	void Flip ()
 	{
 		// Switch the way the player is labelled as facing.
