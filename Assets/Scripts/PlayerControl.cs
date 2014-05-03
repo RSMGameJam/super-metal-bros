@@ -46,7 +46,7 @@ public class PlayerControl : MonoBehaviour
 
 		// If the jump button is pressed and the player is grounded then the player should jump.
 		// 
-		//Debug.Log("Grounded " + grounded);
+		Debug.Log("Grounded " + grounded + ", Jump" + _playerId);
         if (Input.GetButtonDown("Jump" + _playerId) && grounded)
         {
             jump = true;

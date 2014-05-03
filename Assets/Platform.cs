@@ -84,6 +84,7 @@ public class Platform : MonoBehaviour {
 				GameObject go = Instantiate(prefab, pos + Vector3.right*i, Quaternion.identity) as GameObject;
 				//go.GetComponent<BoxCollider2D>().sharedMaterial = mainMaterial;	
 				go.name = string.Format("tile_{0:00}", i);
+				go.layer = LayerMask.NameToLayer("Ground");
 				go.transform.parent = transform;
 				tileObjects.Add(go);
 			}
