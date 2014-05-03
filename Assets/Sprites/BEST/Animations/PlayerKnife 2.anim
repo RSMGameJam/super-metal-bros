@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: PlayerKnife
+  m_Name: PlayerKnife 2
   serializedVersion: 4
   m_AnimationType: 2
   m_Compressed: 0
@@ -17,14 +17,14 @@ AnimationClip:
   m_FloatCurves: []
   m_PPtrCurves:
   - curve:
-    - time: 0
-      value: {fileID: 21300000, guid: c642fa35ed65e244eb031433a20ba167, type: 3}
+    - time: -0
+      value: {fileID: 21300000, guid: 64f5db9d46b285a46a7809c9ea517c0b, type: 3}
     - time: .100000001
-      value: {fileID: 21300000, guid: f0d0e7b59336a2749a3362b44489d0b5, type: 3}
+      value: {fileID: 21300000, guid: 8c39045816d128341a50ca233793d728, type: 3}
     - time: .200000003
-      value: {fileID: 21300000, guid: b937293787e97804bbd7d8c566426591, type: 3}
+      value: {fileID: 21300000, guid: 7a93275e401d07e41b39ccc194e0f1c2, type: 3}
     - time: .5
-      value: {fileID: 21300000, guid: b937293787e97804bbd7d8c566426591, type: 3}
+      value: {fileID: 21300000, guid: 7a93275e401d07e41b39ccc194e0f1c2, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
