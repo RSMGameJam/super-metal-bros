@@ -516,6 +516,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2143662363}
   - 132: {fileID: 2143662361}
+  - 111: {fileID: 2143662360}
   m_Layer: 0
   m_Name: text
   m_TagString: Untagged
@@ -523,6 +524,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!111 &2143662360
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2143662359}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: e91d70c731bd49f41a7ececb31046af6, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: e91d70c731bd49f41a7ececb31046af6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!132 &2143662361
 GUIText:
   m_ObjectHideFlags: 0
