@@ -55,8 +55,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400006}
-  - 132: {fileID: 13200002}
   - 114: {fileID: 11400002}
+  - 132: {fileID: 13200002}
   - 82: {fileID: 8200000}
   m_Layer: 0
   m_Name: Score-text
@@ -73,8 +73,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400008}
-  - 132: {fileID: 13200004}
   - 114: {fileID: 11400004}
+  - 132: {fileID: 13200004}
   - 82: {fileID: 8200002}
   m_Layer: 0
   m_Name: Score-text
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d35365120e3455f8e7ef0481b5a488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countUpDuration: 1
+  countUpDuration: .200000003
   score: 0
 --- !u!114 &11400004
 MonoBehaviour:
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d35365120e3455f8e7ef0481b5a488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countUpDuration: 1
+  countUpDuration: .200000003
   score: 0
 --- !u!114 &11400006
 MonoBehaviour:
