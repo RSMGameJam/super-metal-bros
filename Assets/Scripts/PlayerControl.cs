@@ -44,6 +44,15 @@ public class PlayerControl : MonoBehaviour
         if (grounded)
             anim.SetBool("Jump", false);
 
+
+
+        //knifing
+        if (Input.GetButtonDown("Action" + _playerId) && Knife.KnifeTarget != null)
+        {
+            scoreCounter.AddScore(Knife.KnifeTarget.scoreValue);
+            GameObject.Destroy(Knife.KnifeTarget.gameObject);
+        }
+
         if (Input.GetButtonDown("Action" + _playerId))
             anim.SetTrigger("Knife");
 
@@ -101,14 +110,6 @@ public class PlayerControl : MonoBehaviour
 			// Make sure the player can't jump again until the jump conditions from Update are satisfied.
 			jump = false;
 		}
-
-		if (Input.GetButtonDown("Action"+_playerId) && Knife.KnifeTarget != null) {
-			scoreCounter.AddScore(Knife.KnifeTarget.scoreValue);
-			GameObject.Destroy(Knife.KnifeTarget.gameObject);
-		}
-
-        //OBS visuell grej att han viftar med kniven när han viftar
-        
 
 	}
 
