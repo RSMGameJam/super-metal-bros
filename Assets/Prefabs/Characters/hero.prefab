@@ -23,13 +23,13 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400020}
+  - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400006}
   - 82: {fileID: 8200004}
-  - 114: {fileID: 11400000}
   m_Layer: 9
   m_Name: hero
   m_TagString: Player
@@ -345,6 +345,7 @@ MonoBehaviour:
   tauntProbability: 50
   tauntDelay: 1
   Knife: {fileID: 11400004}
+  scoreCounter: {fileID: 0}
   groundCheck: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
