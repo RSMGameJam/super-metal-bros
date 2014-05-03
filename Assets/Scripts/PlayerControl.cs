@@ -46,7 +46,7 @@ public class PlayerControl : MonoBehaviour
 
 
         //knifing
-        if (Input.GetButtonDown("Action" + _playerId) && Knife.KnifeTarget != null)
+        if (Input.GetButtonDown("Action" + _playerId) && Knife.KnifeTarget != null && !Knife.KnifeTarget.dead)
         {
             scoreCounter.AddScore(Knife.KnifeTarget.scoreValue);
 			Knife.KnifeTarget.Kill();

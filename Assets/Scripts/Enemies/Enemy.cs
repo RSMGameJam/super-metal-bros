@@ -127,6 +127,9 @@ public class Enemy : MonoBehaviour
 	float bloodOffset = 0.5f;
 	public void Kill() {
 		if(dead) return;
+
+		Camera.main.GetComponent<CameraShake>().DoShake();
+
 		dead = true;
 		anim.SetTrigger("Kill");
 		collider2D.enabled = false;

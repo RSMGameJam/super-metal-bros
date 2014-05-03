@@ -16,7 +16,7 @@ public class CameraShake : MonoBehaviour
 
     private void Start()
     {
-        DoShake();
+		DoShake();
     }
 
     private void Update()
