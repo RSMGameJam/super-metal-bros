@@ -19,20 +19,11 @@ public class Platform : MonoBehaviour {
 
 	[SerializeField]private List<GameObject> tileObjects = new List<GameObject>();
 
-	[SerializeField]
-	private BoxCollider2D col;
+	[SerializeField]private BoxCollider2D col;
 	[SerializeField]private GameObject leftEdgeFix;
 	[SerializeField]private GameObject rightEdgeFix;
 
 	void CreateEdgeFixes() {
-
-		manualRebuild = false;
-		
-		if(leftEdgeFix != null)
-			DestroyImmediate(leftEdgeFix.gameObject);
-
-		if(rightEdgeFix != null)
-			DestroyImmediate(rightEdgeFix.gameObject);
 
 		// HAXX: Fix the edges of the platform
 		
@@ -56,6 +47,27 @@ public class Platform : MonoBehaviour {
 	void Update () {
 		if(prefab == null) return;
 
+		if(manualRebuild) {
+			// Destroy tiles and edge fixes
+			List<GameObject> gos = new List<GameObject>();
+			foreach(Transform trans in transform) {
+				gos.Add(trans.gameObject);
+			}
+			for(int i = gos.Count-1; i >= 0; --i)
+			{
+				DestroyImmediate(gos[i]);
+			}
+			tileObjects.Clear();
+			leftEdgeFix = null;
+			rightEdgeFix = null;
+
+			// Collider
+			DestroyImmediate(col);
+			col = null;
+
+			manualRebuild = false;
+		}
+
 		// Edge fixes
 		if(manualRebuild || leftEdgeFix == null || rightEdgeFix == null)
 		{
@@ -64,11 +76,6 @@ public class Platform : MonoBehaviour {
 
 		//Debug.Log("tiles: " + tiles + ", count: " + tileObjects.Count);
 		if(manualRebuild || tiles != tileObjects.Count) {
-			// Destroy old tiles
-			foreach(GameObject go in tileObjects) {
-				DestroyImmediate(go);
-			}
-			tileObjects.Clear();
 
 			// Create new tiles
 			Vector3 pos = transform.position;
@@ -81,15 +88,7 @@ public class Platform : MonoBehaviour {
 				tileObjects.Add(go);
 			}
 
-
-
 			// Update collider
-			if(manualRebuild)
-			{
-				DestroyImmediate(col);
-				col = null;
-			}
-
 			if(col == null) {
 				col = gameObject.AddComponent<BoxCollider2D>();
 			}
