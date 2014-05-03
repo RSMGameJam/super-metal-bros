@@ -7,8 +7,16 @@ public class EnemyVision : MonoBehaviour
     public float angle = 20f;
     public Vector2 offset;
 
+	Enemy enemy;
+
+	void Start() {
+		enemy = GetComponent<Enemy>();
+	}
+
     private void FixedUpdate()
     {
+		if(enemy.dead) return;
+
 		RaycastHit2D hit;
 		hit = Physics2D.Raycast((Vector2)this.transform.position + offset, (transform.localScale.x < 0f ? -1f : 1f)*Vector2.right * transform.localScale.x, visionDistance);
 		Debug.DrawRay((Vector2)this.transform.position + offset, (transform.localScale.x < 0f ? -1f : 1f)*Vector2.right  * visionDistance, Color.yellow);

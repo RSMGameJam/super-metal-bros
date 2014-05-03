@@ -206,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionDistance: 5
   angle: 10
-  offset: {x: 0, y: 0}
+  offset: {x: .200000003, y: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
