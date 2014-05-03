@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Player
+  m_Name: Player 1
   serializedVersion: 2
   m_AnimatorParameters:
   - m_Name: Speed
@@ -263,9 +263,6 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110279476}
-      second: []
-    data:
       first: {fileID: 0}
       second:
       - {fileID: 110126656}
@@ -287,6 +284,9 @@ StateMachine:
       first: {fileID: 110269585}
       second:
       - {fileID: 110172993}
+    data:
+      first: {fileID: 110279476}
+      second: []
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
