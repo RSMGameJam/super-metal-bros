@@ -17,10 +17,29 @@ public class Warp : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col) {
 		// If the player hits the trigger...
-		if (col.gameObject.tag != "NoWarp") {
-			Vector3 newPos = col.gameObject.transform.position;
-			newPos = new Vector3(-(newPos.x * WarpFactor), newPos.y, newPos.z);
-			col.gameObject.transform.position = newPos;
+		if (col.gameObject.tag != "NoWarp") 
+        {
+            if (col.gameObject.layer == LayerMask.NameToLayer("Enemies"))
+            {
+                Enemy en = col.gameObject.GetComponent<Enemy>();
+                if (en != null)
+                {
+                    if (en.noWarp != true)
+                    {
+                        Vector3 newPos = col.gameObject.transform.position;
+                        newPos = new Vector3(-(newPos.x * WarpFactor), newPos.y, newPos.z);
+                        col.gameObject.transform.position = newPos;
+                    }
+                }
+            }
+            else
+            {
+                Vector3 newPos = col.gameObject.transform.position;
+                newPos = new Vector3(-(newPos.x * WarpFactor), newPos.y, newPos.z);
+                col.gameObject.transform.position = newPos;
+            }
+
+			
 		}
 	}
 }

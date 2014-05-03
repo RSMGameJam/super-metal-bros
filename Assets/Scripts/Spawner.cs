@@ -14,7 +14,6 @@ public class Spawner : MonoBehaviour
 		InvokeRepeating("Spawn", spawnDelay, spawnTime);
 	}
 
-
 	void Spawn ()
 	{
 		// Instantiate a random enemy.

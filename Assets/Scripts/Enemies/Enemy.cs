@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
 	public float deathSpinMax = 100f;			// A value to give the maximum amount of Torque when dying
 	public int scoreValue = 10;
 
+    public bool noWarp = false;
+
 
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
 	private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
