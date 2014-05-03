@@ -45,7 +45,6 @@ public class PlayerControl : MonoBehaviour
             anim.SetBool("Jump", false);
 
 
-
         //knifing
         if (Input.GetButtonDown("Action" + _playerId) && Knife.KnifeTarget != null)
         {
