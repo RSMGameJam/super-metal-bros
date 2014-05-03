@@ -18,13 +18,16 @@ public class Score : MonoBehaviour
 		previousScore = score;
 		score += pAddScore;
 
-		_cereal.Clear();
-		_cereal.Add(new CerealLerpEvent<float>(previousScore, previousScore + pAddScore, countUpDuration, Mathf.Lerp)
-		{
-			OnChange = (pChange) => {
-				guiText.text = "Score: " + (int)pChange;
-			}
-		});
+		// Temp guitext set
+		guiText.text = "Score: " + score;
+
+		//_cereal.Clear();
+		//_cereal.Add(new CerealLerpEvent<float>(previousScore, previousScore + pAddScore, countUpDuration, Mathf.Lerp)
+		//{
+		//	OnChange = (pChange) => {
+		//		guiText.text = "Score: " + (int)pChange;
+		//	}
+		//});
 	}
 
 	void Awake ()

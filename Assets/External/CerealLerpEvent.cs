@@ -27,7 +27,7 @@ public class CerealLerpEvent<T> : ICerealEvent {
 
 		timeProvider.Update();
 		_startTime = timeProvider.time;
-		Debug.Log("NEW LERP");
+		//Debug.Log("NEW LERP");
 	}
 
 	public void Begin()
@@ -41,7 +41,7 @@ public class CerealLerpEvent<T> : ICerealEvent {
 		timeProvider.Update();
 
 		// Update progress of lerp
-		Debug.Log("time: " + timeProvider.time + " - " + _startTime + " / " + _duration);
+		//Debug.Log("time: " + timeProvider.time + " - " + _startTime + " / " + _duration);
 		_progress = Mathf.Clamp01((timeProvider.time - _startTime) / _duration);
 
 		//Debug.Log("Progress: " + _progress);
