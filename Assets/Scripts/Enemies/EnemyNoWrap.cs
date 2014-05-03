@@ -13,6 +13,5 @@ public class EnemyNoWrap : MonoBehaviour {
                 en.noWarp = true;
             }
         }
-
     }
 }
