@@ -15,7 +15,7 @@ public class CerealLerpEvent<T> : ICerealEvent {
 	private T _to;
 
 	private float _duration;
-	//private float _endTime;
+	float _progress;
 
 	float _startTime;
 
@@ -23,23 +23,25 @@ public class CerealLerpEvent<T> : ICerealEvent {
 		_from = pFrom;
 		_to = pTo;
 		_duration = pDuration;
-		//_endTime = timeProvider.time + pDuration;
 		Lerp = pLerp;
+
+		timeProvider.Update();
+		_startTime = timeProvider.time;
+		Debug.Log("NEW LERP");
 	}
 
 	public void Begin()
 	{
-		timeProvider.Update();
-		_startTime = timeProvider.time;
+		
 	}
 
-	float _progress;
 	public void Update()
 	{
 		// Updating the timeProvider
 		timeProvider.Update();
 
 		// Update progress of lerp
+		Debug.Log("time: " + timeProvider.time + " - " + _startTime + " / " + _duration);
 		_progress = Mathf.Clamp01((timeProvider.time - _startTime) / _duration);
 
 		//Debug.Log("Progress: " + _progress);

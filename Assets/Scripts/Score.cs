@@ -14,17 +14,17 @@ public class Score : MonoBehaviour
 	private Cereal _cereal = new Cereal();
 
 	public void AddScore(int pAddScore) {
+		//Debug.Log(name + ": " + score + " + " + pAddScore);
+		previousScore = score;
 		score += pAddScore;
+
 		_cereal.Clear();
-		_cereal.Add(new CerealLerpEvent<float>(previousScore, (float)score, countUpDuration, Mathf.Lerp)
+		_cereal.Add(new CerealLerpEvent<float>(previousScore, previousScore + pAddScore, countUpDuration, Mathf.Lerp)
 		{
 			OnChange = (pChange) => {
-				Debug.Log("derp");
 				guiText.text = "Score: " + (int)pChange;
 			}
 		});
-		previousScore = score;
-		// Debug.Log("Done with score " + pAddScore);
 	}
 
 	void Awake ()
