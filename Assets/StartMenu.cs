@@ -3,10 +3,8 @@ using System.Collections;
 
 public class StartMenu : MonoBehaviour {
 
-	public Rect levelOneButton;
-
-	void OnGUI() {
-		if(GUI.Button(levelOneButton, "Level One"))
+	void Update() {
+		if(Input.anyKeyDown)
 		{
 			Application.LoadLevel(1);
 		}
