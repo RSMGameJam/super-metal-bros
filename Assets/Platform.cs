@@ -5,11 +5,10 @@ using System.Collections.Generic;
 [ExecuteInEditMode]
 public class Platform : MonoBehaviour {
 
+	const float edgeFixColliderWidth = 0.25f;
 
 	public PhysicsMaterial2D mainMaterial;
 	public PhysicsMaterial2D edgeMaterial;
-
-	const float edgeFixColliderWidth = 0.25f;
 
 	public int tiles = 1;
 	public GameObject prefab;
@@ -20,6 +19,8 @@ public class Platform : MonoBehaviour {
 
 	[SerializeField]private List<GameObject> tileObjects = new List<GameObject>();
 
+	[SerializeField]
+	private BoxCollider2D col;
 	[SerializeField]private GameObject leftEdgeFix;
 	[SerializeField]private GameObject rightEdgeFix;
 
@@ -74,11 +75,34 @@ public class Platform : MonoBehaviour {
 			for(int i = 0; i < tiles; ++i) {
 
 				GameObject go = Instantiate(prefab, pos + Vector3.right*i, Quaternion.identity) as GameObject;
-				go.GetComponent<BoxCollider2D>().sharedMaterial = mainMaterial;	
+				//go.GetComponent<BoxCollider2D>().sharedMaterial = mainMaterial;	
 				go.name = string.Format("tile_{0:00}", i);
 				go.transform.parent = transform;
 				tileObjects.Add(go);
 			}
+
+
+
+			// Update collider
+			if(manualRebuild)
+			{
+				DestroyImmediate(col);
+				col = null;
+			}
+
+			if(col == null) {
+				col = gameObject.AddComponent<BoxCollider2D>();
+			}
+			else {
+				BoxCollider2D boxCol = col.GetComponent<BoxCollider2D>();
+				if(boxCol != null)
+					col = boxCol;
+				else
+					col = gameObject.AddComponent<BoxCollider2D>();
+			}
+			col.sharedMaterial = mainMaterial;
+			col.size = new Vector2(tileObjects.Count, 1f);
+			col.center = new Vector2(tileObjects.Count/2f - 0.5f, 0f);
 
 			// Update position right edge fix
 			rightEdgeFix.transform.localPosition = Vector2.zero + Vector2.right*(edgeFixOffset+tileObjects.Count-1f+0.5f-0.125f) - Vector2.up*edgeFixOffset;
