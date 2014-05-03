@@ -44,6 +44,9 @@ public class PlayerControl : MonoBehaviour
         if (grounded)
             anim.SetBool("Jump", false);
 
+        if (Input.GetButtonDown("Action" + _playerId))
+            anim.SetTrigger("Knife");
+
 		// If the jump button is pressed and the player is grounded then the player should jump.
 		// 
 		//Debug.Log("Grounded " + grounded + ", Jump" + _playerId);
@@ -105,8 +108,7 @@ public class PlayerControl : MonoBehaviour
 		}
 
         //OBS visuell grej att han viftar med kniven när han viftar
-        if(Input.GetButtonDown("Action" + _playerId))
-            anim.SetTrigger("Knife");
+        
 
 	}
 
