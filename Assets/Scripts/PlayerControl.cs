@@ -31,7 +31,7 @@ public class PlayerControl : MonoBehaviour
 	{
 		// Setting up references.
 		groundCheck = transform.Find("groundCheck");
-		anim = GetComponent<Animator>();
+		anim = transform.Find("body").GetComponent<Animator>();
 		_playerId = this.GetComponent<Player>().PlayerId.ToString();
 		score = FindObjectOfType<Score>();
 	}
@@ -40,13 +40,19 @@ public class PlayerControl : MonoBehaviour
 	void Update()
 	{
 		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
+		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+
+        if (grounded)
+            anim.SetBool("Jump", false);
 
 		// If the jump button is pressed and the player is grounded then the player should jump.
 		// 
 		//Debug.Log("Grounded " + grounded);
-		if(Input.GetButtonDown("Jump"+_playerId) && grounded)
-			jump = true;
+        if (Input.GetButtonDown("Jump" + _playerId) && grounded)
+        {
+            jump = true;
+            anim.SetBool("Jump", true);
+        }
 	}
 
 
@@ -82,7 +88,6 @@ public class PlayerControl : MonoBehaviour
 		{
 			Debug.Log("Jump");
 			// Set the Jump animator trigger parameter.
-			anim.SetTrigger("Jump");
 
 			// Play a random jump audio clip.
 			int i = Random.Range(0, jumpClips.Length);
