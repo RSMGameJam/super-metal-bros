@@ -5,6 +5,10 @@ using System.Collections.Generic;
 [ExecuteInEditMode]
 public class Platform : MonoBehaviour {
 
+
+	public PhysicsMaterial2D mainMaterial;
+	public PhysicsMaterial2D edgeMaterial;
+
 	const float edgeFixColliderWidth = 0.25f;
 
 	public int tiles = 1;
@@ -34,6 +38,7 @@ public class Platform : MonoBehaviour {
 		// Left
 		leftEdgeFix = new GameObject();
 		leftEdgeFix.AddComponent<BoxCollider2D>().transform.localScale = new Vector3(edgeFixColliderWidth, 1f, 1f);
+		leftEdgeFix.GetComponent<BoxCollider2D>().sharedMaterial = edgeMaterial;
 		leftEdgeFix.name = "EdgeFix_left";
 		leftEdgeFix.transform.parent = transform;
 		leftEdgeFix.transform.localPosition = Vector2.zero - Vector2.right*(edgeFixOffset+0.5f-0.125f) - Vector2.up*edgeFixOffset;
@@ -41,6 +46,7 @@ public class Platform : MonoBehaviour {
 		// Right
 		rightEdgeFix = new GameObject();
 		rightEdgeFix.AddComponent<BoxCollider2D>().transform.localScale = new Vector3(edgeFixColliderWidth, 1f, 1f);
+		rightEdgeFix.GetComponent<BoxCollider2D>().sharedMaterial = edgeMaterial;
 		rightEdgeFix.name = "EdgeFix_right";
 		rightEdgeFix.transform.parent = transform;
 		rightEdgeFix.transform.localPosition = Vector2.zero + Vector2.right*(edgeFixOffset+tileObjects.Count-1f+0.5f-0.125f) - Vector2.up*edgeFixOffset;
@@ -68,6 +74,7 @@ public class Platform : MonoBehaviour {
 			for(int i = 0; i < tiles; ++i) {
 
 				GameObject go = Instantiate(prefab, pos + Vector3.right*i, Quaternion.identity) as GameObject;
+				go.GetComponent<BoxCollider2D>().sharedMaterial = mainMaterial;	
 				go.name = string.Format("tile_{0:00}", i);
 				go.transform.parent = transform;
 				tileObjects.Add(go);

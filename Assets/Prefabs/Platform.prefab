@@ -78,8 +78,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1955d258a0d5ac741839d53127d6b056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMaterial: {fileID: 6200000, guid: 1cd66fad996f9754fa9ca5f999202bfe, type: 2}
+  edgeMaterial: {fileID: 6200000, guid: 1debb068374764196a01e1c69c1f413f, type: 2}
   tiles: 1
   prefab: {fileID: 100000, guid: d75f128fcd8601846a71a480c1efe3fb, type: 2}
+  edgeFixOffset: .100000001
+  manualRebuild: 0
+  tileObjects: []
+  leftEdgeFix: {fileID: 0}
+  rightEdgeFix: {fileID: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
