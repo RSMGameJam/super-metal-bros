@@ -49,7 +49,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetButtonDown("Action" + _playerId) && Knife.KnifeTarget != null)
         {
             scoreCounter.AddScore(Knife.KnifeTarget.scoreValue);
-            GameObject.Destroy(Knife.KnifeTarget.gameObject);
+			Knife.KnifeTarget.Kill();
         }
 
         if (Input.GetButtonDown("Action" + _playerId))

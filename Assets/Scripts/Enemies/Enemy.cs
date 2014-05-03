@@ -12,22 +12,27 @@ public class Enemy : MonoBehaviour
 	public float deathSpinMin = -100f;			// A value to give the minimum amount of Torque when dying
 	public float deathSpinMax = 100f;			// A value to give the maximum amount of Torque when dying
 	public int scoreValue = 10;
+	public bool dead = false;			// Whether or not the enemy is dead.
 
 
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
 	private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
-	private bool dead = false;			// Whether or not the enemy is dead.
 
+	private Animator anim;
 	
 	void Awake()
 	{
 		// Setting up the references.
 		ren = transform.Find("body").GetComponent<SpriteRenderer>();
 		frontCheck = transform.Find("frontCheck").transform;
+
+		anim = transform.Find("body").GetComponent<Animator>();
 	}
 
 	void FixedUpdate ()
 	{
+		if(dead) return;
+
 		// Create an array of all the colliders in front of the enemy.
 		Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position, 1);
 
@@ -59,12 +64,18 @@ public class Enemy : MonoBehaviour
 	
 	public void Hurt()
 	{
+		if(dead) return;
+
 		// Reduce the number of hit points by one.
 		HP--;
 	}
 	
 	void Death()
 	{
+		if(dead) return;
+
+		dead = true;
+
 		// Find all of the sprite renderers on this object and it's children.
 		SpriteRenderer[] otherRenderers = GetComponentsInChildren<SpriteRenderer>();
 
@@ -77,9 +88,6 @@ public class Enemy : MonoBehaviour
 		// Re-enable the main sprite renderer and set it's sprite to the deadEnemy sprite.
 		ren.enabled = true;
 		ren.sprite = deadEnemy;
-
-		// Set dead to true.
-		dead = true;
 
 		// Allow the enemy to rotate and spin it by adding a torque.
 		rigidbody2D.fixedAngle = false;
@@ -103,6 +111,8 @@ public class Enemy : MonoBehaviour
 
 		// Instantiate the 100 points prefab at this point.
 		Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
+
+		
 	}
 
 
@@ -112,5 +122,21 @@ public class Enemy : MonoBehaviour
 		Vector3 enemyScale = transform.localScale;
 		enemyScale.x *= -1;
 		transform.localScale = enemyScale;
+	}
+
+	float bloodOffset = 0.5f;
+	public void Kill() {
+		if(dead) return;
+		dead = true;
+		anim.SetTrigger("Kill");
+		collider2D.enabled = false;
+		rigidbody2D.gravityScale = 0f;
+		rigidbody2D.velocity = Vector2.zero;
+		transform.Translate(Vector3.up*bloodOffset);
+		Invoke("Remove", 5f);
+	}
+
+	void Remove() {
+		Destroy(gameObject);
 	}
 }
