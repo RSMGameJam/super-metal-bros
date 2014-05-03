@@ -14,10 +14,10 @@ public class Platform : MonoBehaviour {
 
 	public bool manualRebuild = false;
 
-	private List<GameObject> tileObjects = new List<GameObject>();
+	[SerializeField]private List<GameObject> tileObjects = new List<GameObject>();
 
-	private GameObject leftEdgeFix;
-	private GameObject rightEdgeFix;
+	[SerializeField]private GameObject leftEdgeFix;
+	[SerializeField]private GameObject rightEdgeFix;
 
 	void CreateEdgeFixes() {
 
