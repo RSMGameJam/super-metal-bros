@@ -17,13 +17,13 @@ public class PlayerControl : MonoBehaviour
 	public float tauntProbability = 50f;	// Chance of a taunt happening.
 	public float tauntDelay = 1f;			// Delay for when the taunt should happen.
 	public Knife Knife;
+	public Score scoreCounter;
 
 
 	private int tauntIndex;					// The index of the taunts array indicating the most recent taunt.
 	public Transform groundCheck;			// A position marking where to check if the player is grounded.
 	private bool grounded = false;			// Whether or not the player is grounded.
 	private Animator anim;					// Reference to the player's animator component.
-	private Score score;
 
 	private string _playerId;
 
@@ -33,7 +33,6 @@ public class PlayerControl : MonoBehaviour
 		groundCheck = transform.Find("groundCheck");
 		anim = GetComponent<Animator>();
 		_playerId = this.GetComponent<Player>().PlayerId.ToString();
-		score = FindObjectOfType<Score>();
 	}
 
 
@@ -96,7 +95,7 @@ public class PlayerControl : MonoBehaviour
 		}
 
 		if (Input.GetButtonDown("Action"+_playerId) && Knife.KnifeTarget != null) {
-			score.AddScore(Knife.KnifeTarget.scoreValue);
+			scoreCounter.AddScore(Knife.KnifeTarget.scoreValue);
 			GameObject.Destroy(Knife.KnifeTarget.gameObject);
 		}
 
