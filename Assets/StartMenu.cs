@@ -6,7 +6,7 @@ public class StartMenu : MonoBehaviour {
 	void Update() {
 		if(Input.anyKeyDown)
 		{
-			Application.LoadLevel(1);
+			Application.LoadLevel(StateHandler.LEVEL_ONE);
 		}
 	}
 }
