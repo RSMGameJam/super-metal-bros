@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Knife : MonoBehaviour {
 	
-	public GameObject KnifeTarget;
+	public Enemy KnifeTarget;
 
 	// Use this for initialization
 	void Start () {
@@ -18,14 +18,14 @@ public class Knife : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D col) {
 		if (col.gameObject.layer == LayerMask.NameToLayer ("Enemies")) {
 		//if (col.gameObject.tag == "Enemy") {
-			KnifeTarget = col.gameObject;
+			KnifeTarget = col.gameObject.GetComponent<Enemy>();
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D col) {
 		if (col.gameObject.layer == LayerMask.NameToLayer ("Enemies")) {
 		//if (col.gameObject.tag == "Enemy") {
-					KnifeTarget = null;
+				KnifeTarget = null;
 			}
 	}
 }

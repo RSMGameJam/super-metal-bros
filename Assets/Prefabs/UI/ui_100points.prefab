@@ -58,6 +58,7 @@ GameObject:
   - 4: {fileID: 400006}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: ui_100points
   m_TagString: Untagged
@@ -114,6 +115,7 @@ Transform:
   m_Father: {fileID: 0}
 --- !u!95 &9500000
 Animator:
+  serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -121,7 +123,6 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 3d77ab9630bb6462aace56d0510c7173, type: 2}
-  m_AnimationSet: {fileID: 0}
   m_CullingMode: 1
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
@@ -141,6 +142,19 @@ MonoBehaviour:
   awakeDestroyDelay: 0
   findChild: 0
   namedChild: 
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf0cbd876199046c58c1f4aa3fa95ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player1Score: 0
+  Player2Score: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -163,9 +177,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_SortingLayerID: 149272721
   m_Sprite: {fileID: 21300000, guid: b60c382fc506348a48402c25ba4fdacb, type: 3}
-  m_Color:
-    serializedVersion: 2
-    rgba: 3623878655
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21200002
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -188,9 +200,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_SortingLayerID: 149272721
   m_Sprite: {fileID: 21300000, guid: b60c382fc506348a48402c25ba4fdacb, type: 3}
-  m_Color:
-    serializedVersion: 2
-    rgba: 3623878655
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21200004
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -213,9 +223,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_SortingLayerID: 149272721
   m_Sprite: {fileID: 21300000, guid: ef8ca0b19df694e2988c6019261d340e, type: 3}
-  m_Color:
-    serializedVersion: 2
-    rgba: 3623878655
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

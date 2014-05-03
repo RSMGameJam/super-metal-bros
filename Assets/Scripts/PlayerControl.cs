@@ -20,9 +20,10 @@ public class PlayerControl : MonoBehaviour
 
 
 	private int tauntIndex;					// The index of the taunts array indicating the most recent taunt.
-	private Transform groundCheck;			// A position marking where to check if the player is grounded.
+	public Transform groundCheck;			// A position marking where to check if the player is grounded.
 	private bool grounded = false;			// Whether or not the player is grounded.
 	private Animator anim;					// Reference to the player's animator component.
+	private Score score;
 
 	private string _playerId;
 
@@ -32,6 +33,7 @@ public class PlayerControl : MonoBehaviour
 		groundCheck = transform.Find("groundCheck");
 		anim = GetComponent<Animator>();
 		_playerId = this.GetComponent<Player>().PlayerId.ToString();
+		score = FindObjectOfType<Score>();
 	}
 
 
@@ -41,6 +43,8 @@ public class PlayerControl : MonoBehaviour
 		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
 
 		// If the jump button is pressed and the player is grounded then the player should jump.
+		// 
+		//Debug.Log("Grounded " + grounded);
 		if(Input.GetButtonDown("Jump"+_playerId) && grounded)
 			jump = true;
 	}
@@ -76,6 +80,7 @@ public class PlayerControl : MonoBehaviour
 		// If the player should jump...
 		if(jump)
 		{
+			Debug.Log("Jump");
 			// Set the Jump animator trigger parameter.
 			anim.SetTrigger("Jump");
 
@@ -84,14 +89,15 @@ public class PlayerControl : MonoBehaviour
 			AudioSource.PlayClipAtPoint(jumpClips[i], transform.position);
 
 			// Add a vertical force to the player.
-			rigidbody2D.AddForce(new Vector2(0f, jumpForce));
+			rigidbody2D.AddForce(new Vector2(jumpForce, jumpForce));
 
 			// Make sure the player can't jump again until the jump conditions from Update are satisfied.
 			jump = false;
 		}
 
 		if (Input.GetButtonDown("Action"+_playerId) && Knife.KnifeTarget != null) {
-			GameObject.Destroy(Knife.KnifeTarget);
+			score.AddScore(Knife.KnifeTarget.scoreValue);
+			GameObject.Destroy(Knife.KnifeTarget.gameObject);
 		}
 
 	}
