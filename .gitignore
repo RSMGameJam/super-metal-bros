@@ -21,4 +21,5 @@
 *.app
 *.apk
 *.exe
+*.DotSettings
 Assets/MovieTextures
