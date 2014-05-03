@@ -14,8 +14,7 @@ public class Enemy : MonoBehaviour
 	public int scoreValue = 10;
 	public bool dead = false;			// Whether or not the enemy is dead.
 
-    public bool noWarp = false;
-
+	public bool noWarp = false;
 
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
 	private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
@@ -138,7 +137,7 @@ public class Enemy : MonoBehaviour
 		rigidbody2D.gravityScale = 0f;
 		rigidbody2D.velocity = Vector2.zero;
 		transform.Translate(Vector3.up*bloodOffset);
-		Invoke("Remove", 5f);
+		//Invoke("Remove", 5f);
 	}
 
 	void Remove() {

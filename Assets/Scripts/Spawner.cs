@@ -21,17 +21,6 @@ public class Spawner : MonoBehaviour
 		InvokeRepeating("Spawn", 0f, Random.Range(minRespawnTime, maxRespawnTime));
 	}
 
-<<<<<<< HEAD
-=======
-	void Update() {
-		// No enemy alive, spawn new after timer
-		//if(latestEnemy == null)
-		//{
-		//	Invoke("Spawn", respawnTime);
-		//}
-	}
-
->>>>>>> 93c524fbd0843a08ce0681bf957fa336acc50903
 	void Spawn ()
 	{
 		int enemyIndex = Random.Range(0, enemies.Length);
