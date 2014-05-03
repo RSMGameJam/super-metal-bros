@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
 	public int scoreValue = 10;
 	public bool dead = false;			// Whether or not the enemy is dead.
 
+    public bool noWarp = false;
+
 
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
 	private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
