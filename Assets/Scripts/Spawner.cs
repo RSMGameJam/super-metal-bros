@@ -3,28 +3,33 @@ using System.Collections;
 
 public class Spawner : MonoBehaviour
 {
-	public float spawnTime = 5f;		// The amount of time between each spawn.
-	public float spawnDelay = 3f;		// The amount of time before spawning starts.
-	public GameObject[] enemies;		// Array of enemy prefabs.
+	public float respawnTime = 5f;
+	public GameObject[] enemies;
 
+	private Enemy latestEnemy;
 
 	void Start ()
 	{
-		// Start calling the Spawn function repeatedly after a delay .
-		InvokeRepeating("Spawn", spawnDelay, spawnTime);
+		Spawn();
 	}
 
+	void Update() {
+		// No enemy alive, spawn new after timer
+		if(latestEnemy == null)
+		{
+			Invoke("Spawn", respawnTime);
+		}
+	}
 
 	void Spawn ()
 	{
-		// Instantiate a random enemy.
 		int enemyIndex = Random.Range(0, enemies.Length);
-		Instantiate(enemies[enemyIndex], transform.position, transform.rotation);
+		GameObject go = Instantiate(enemies[enemyIndex], transform.position, transform.rotation) as GameObject;
+		latestEnemy = go.GetComponent<Enemy>();
+	}
 
-		// Play the spawning effect from all of the particle systems.
-		foreach(ParticleSystem p in GetComponentsInChildren<ParticleSystem>())
-		{
-			p.Play();
-		}
+	void OnDrawGizmos() {
+		Gizmos.color = Color.red;
+		Gizmos.DrawSphere(transform.position, 0.5f);
 	}
 }
