@@ -50,7 +50,6 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetButtonDown("Jump" + _playerId) && grounded)
         {
             jump = true;
-            anim.SetBool("Jump", true);
         }
 	}
 
@@ -87,6 +86,7 @@ public class PlayerControl : MonoBehaviour
 		{
 			Debug.Log("Jump");
 			// Set the Jump animator trigger parameter.
+            anim.SetBool("Jump", true);
 
 			// Play a random jump audio clip.
 			int i = Random.Range(0, jumpClips.Length);
@@ -103,6 +103,10 @@ public class PlayerControl : MonoBehaviour
 			scoreCounter.AddScore(Knife.KnifeTarget.scoreValue);
 			GameObject.Destroy(Knife.KnifeTarget.gameObject);
 		}
+
+        //OBS visuell grej att han viftar med kniven när han viftar
+        if(Input.GetButtonDown("Action" + _playerId))
+            anim.SetTrigger("Knife");
 
 	}
 
