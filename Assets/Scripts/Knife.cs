@@ -17,14 +17,12 @@ public class Knife : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col) {
 		if (col.gameObject.layer == LayerMask.NameToLayer ("Enemies")) {
-		//if (col.gameObject.tag == "Enemy") {
 			KnifeTarget = col.gameObject.GetComponent<Enemy>();
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D col) {
 		if (col.gameObject.layer == LayerMask.NameToLayer ("Enemies")) {
-		//if (col.gameObject.tag == "Enemy") {
 				KnifeTarget = null;
 			}
 	}
