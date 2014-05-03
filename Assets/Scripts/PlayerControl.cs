@@ -27,17 +27,22 @@ public class PlayerControl : MonoBehaviour
 
 	private string _playerId;
 
+	private Player player;
+
 	void Awake()
 	{
 		// Setting up references.
 		groundCheck = transform.Find("groundCheck");
 		anim = transform.Find("body").GetComponent<Animator>();
 		_playerId = this.GetComponent<Player>().PlayerId.ToString();
+		player = GetComponent<Player>();
 	}
 
 
 	void Update()
 	{
+		if(player.dead) return;
+
 		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
 		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
@@ -65,8 +70,10 @@ public class PlayerControl : MonoBehaviour
 	}
 
 
-	void FixedUpdate ()
+	void FixedUpdate () 
 	{
+		if(player.dead) return;
+
 		// Cache the horizontal input.
 		float h = Input.GetAxis("Horizontal"+_playerId);
 
@@ -115,6 +122,8 @@ public class PlayerControl : MonoBehaviour
 
 	void Flip ()
 	{
+		if(player.dead) return;
+
 		// Switch the way the player is labelled as facing.
 		facingRight = !facingRight;
 

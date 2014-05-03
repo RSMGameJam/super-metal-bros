@@ -132,6 +132,8 @@ public class Enemy : MonoBehaviour
 		Camera.main.GetComponent<CameraShake>().DoShake();
 
 		dead = true;
+		Destroy(transform.Find("FOV").gameObject);
+
 		anim.SetTrigger("Kill");
 		collider2D.enabled = false;
 		rigidbody2D.gravityScale = 0f;

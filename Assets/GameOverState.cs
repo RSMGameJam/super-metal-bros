@@ -8,6 +8,8 @@ public class GameOverState : MonoBehaviour {
     private Spawner[] spawners;
     private Timer timer;
 
+	bool isGameOver = false;
+
 	// Use this for initialization
 	void Start () {
         spawners = GameObject.FindObjectsOfType<Spawner>();
@@ -18,11 +20,20 @@ public class GameOverState : MonoBehaviour {
 	void Update () {
         if (timer.TimeLeft <= 0)
         {
-            foreach (Spawner spawn in spawners)
-            {
-                spawn.gameObject.SetActive(false);
-            }
-            GameOverText.SetActiveRecursively(true);
+			if(!isGameOver)
+
+			{
+				foreach (Spawner spawn in spawners)
+				{
+					spawn.gameObject.SetActive(false);
+				}
+				GameOverText.SetActiveRecursively(true);
+				isGameOver = true;
+			}
+
+			if(Input.anyKeyDown) {
+				StateHandler.state = GameState.LEVELONE;
+			}
         }
 	}
 }

@@ -38,6 +38,7 @@ public class StateHandler : MonoBehaviour {
 		current = this;
 
 		// Start menu
-		state = GameState.STARTMENU;
+		//state = GameState.STARTMENU;
+		state = GameState.LEVELONE;
 	}
 }
