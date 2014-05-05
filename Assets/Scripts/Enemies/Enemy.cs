@@ -135,14 +135,24 @@ public class Enemy : MonoBehaviour
 		Destroy(transform.Find("FOV").gameObject);
 
 		anim.SetTrigger("Kill");
-		collider2D.enabled = false;
-		rigidbody2D.gravityScale = 0f;
-		rigidbody2D.velocity = Vector2.zero;
-		transform.Translate(Vector3.up*bloodOffset);
-		//Invoke("Remove", 5f);
+
+		transform.Find("body").Translate(Vector3.up * bloodOffset);
+
+		//rigidbody2D.isKinematic = true;
+		//Destroy(collider2D);
+		//Destroy(rigidbody2D);
+
+		// Wait for blood to fall onto ground
 	}
 
-	void Remove() {
-		Destroy(gameObject);
+	void OnCollisionEnter2D(Collision2D coll)
+	{
+		// Wait for blood to fall onto the ground
+		if(dead)
+		{
+			rigidbody2D.isKinematic = true;
+			Destroy(collider2D);
+			Destroy(rigidbody2D);
+		}
 	}
 }

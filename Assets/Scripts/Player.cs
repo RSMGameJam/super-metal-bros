@@ -4,15 +4,17 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
 	public int PlayerId;
+	public bool dead = false;
 
     private Animator anim;
 
-	public bool dead = false;
+	private PlayerControl playerControl;
 
 	Vector2 startPos;
 
 	void Awake() {
 		startPos = transform.position;
+		playerControl = GetComponent<PlayerControl>();
 	}
 
 	// Use this for initialization
@@ -33,31 +35,35 @@ public class Player : MonoBehaviour {
 		
 		dead = true;
 
-		// disable physics on the player carcass
-		rigidbody2D.isKinematic = true;
-		collider2D.enabled = false;
-		//collider2D.enabled = false;
-		//rigidbody2D.gravityScale = 0f;
-		//rigidbody2D.velocity = Vector2.zero;
-		
-		transform.Translate(Vector3.up);
-
-        anim.SetTrigger("Die");
+		anim.SetTrigger("Die");
+		transform.Find("body").Translate(Vector3.up);
 
 		Invoke("Respawn", 2f);
     }
+
+	void OnCollisionEnter2D(Collision2D coll)
+	{
+		// Wait for blood to fall onto the ground
+		if (dead)
+		{
+			if (playerControl.GroundCheck())
+			{
+				rigidbody2D.isKinematic = true;
+				collider2D.enabled = false;
+			}
+		}
+	}
 
 	void Respawn() {
 		dead = false;
 
 		anim.SetTrigger("Respawn");
 
+		// reposition body
+		transform.Find("body").Translate(-Vector3.up);
+
 		// reenable physics on the player carcass
 		rigidbody2D.isKinematic = false;
 		collider2D.enabled = true;
-
-		//collider2D.enabled = true;
-		//rigidbody2D.gravityScale = 1f;
-		//transform.position = startPos;
 	}
 }

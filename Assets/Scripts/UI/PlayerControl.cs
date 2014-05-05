@@ -38,13 +38,17 @@ public class PlayerControl : MonoBehaviour
 		player = GetComponent<Player>();
 	}
 
+	public bool GroundCheck()
+	{
+		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
+		return Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+	}
 
 	void Update()
 	{
 		if(player.dead) return;
 
-		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+		grounded = GroundCheck();
 
         if (grounded)
             anim.SetBool("Jump", false);
