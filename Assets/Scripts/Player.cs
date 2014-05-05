@@ -30,11 +30,16 @@ public class Player : MonoBehaviour {
     public void Die()
     {
 		if(dead) return;
+		
 		dead = true;
 
+		// disable physics on the player carcass
+		rigidbody2D.isKinematic = true;
 		collider2D.enabled = false;
-		rigidbody2D.gravityScale = 0f;
-		rigidbody2D.velocity = Vector2.zero;
+		//collider2D.enabled = false;
+		//rigidbody2D.gravityScale = 0f;
+		//rigidbody2D.velocity = Vector2.zero;
+		
 		transform.Translate(Vector3.up);
 
         anim.SetTrigger("Die");
@@ -44,9 +49,15 @@ public class Player : MonoBehaviour {
 
 	void Respawn() {
 		dead = false;
+
 		anim.SetTrigger("Respawn");
+
+		// reenable physics on the player carcass
+		rigidbody2D.isKinematic = false;
 		collider2D.enabled = true;
-		rigidbody2D.gravityScale = 1f;
-		transform.position = startPos;
+
+		//collider2D.enabled = true;
+		//rigidbody2D.gravityScale = 1f;
+		//transform.position = startPos;
 	}
 }
