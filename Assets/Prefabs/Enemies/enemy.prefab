@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e982f6bed79d0840a1611542e9a0cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionDistance: 5
+  visionDistance: 4.30000019
   angle: 10
   offset: {x: .200000003, y: 0}
   eye: {fileID: 400008}
