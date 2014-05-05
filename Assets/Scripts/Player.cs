@@ -35,6 +35,10 @@ public class Player : MonoBehaviour {
 		
 		dead = true;
 
+		// no more jump
+		anim.SetBool("Jump", false);
+		playerControl.isJumping = false;
+
 		anim.SetTrigger("Die");
 		transform.Find("body").Translate(Vector3.up);
 
@@ -61,6 +65,7 @@ public class Player : MonoBehaviour {
 
 		// reposition body
 		transform.Find("body").Translate(-Vector3.up);
+		transform.position = startPos;
 
 		// reenable physics on the player carcass
 		rigidbody2D.isKinematic = false;

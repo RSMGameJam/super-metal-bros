@@ -6,7 +6,7 @@ public class PlayerControl : MonoBehaviour
 	[HideInInspector]
 	public bool facingRight = true;			// For determining which way the player is currently facing.
 	[HideInInspector]
-	public bool jump = false;				// Condition for whether the player should jump.
+	public bool isJumping = false;				// Condition for whether the player should jump.
 
 
 	public float moveForce = 365f;			// Amount of force added to move the player left and right.
@@ -48,28 +48,30 @@ public class PlayerControl : MonoBehaviour
 	{
 		if(player.dead) return;
 
+		// jumping
 		grounded = GroundCheck();
+		if (grounded)
+		{
+			anim.SetBool("Jump", false);
 
-        if (grounded)
-            anim.SetBool("Jump", false);
+			if(Input.GetButtonDown("Jump" + _playerId))
+			{
+				isJumping = true;
+			}
+		}
 
-
-        //knifing
-        if (Input.GetButtonDown("Action" + _playerId) && Knife.KnifeTarget != null && !Knife.KnifeTarget.dead)
-        {
-            scoreCounter.AddScore(Knife.KnifeTarget.scoreValue);
-			Knife.KnifeTarget.Kill();
-        }
-
+        // knifing
         if (Input.GetButtonDown("Action" + _playerId))
+        {
+			// always play animation
             anim.SetTrigger("Knife");
 
-		// If the jump button is pressed and the player is grounded then the player should jump.
-		// 
-		//Debug.Log("Grounded " + grounded + ", Jump" + _playerId);
-        if (Input.GetButtonDown("Jump" + _playerId) && grounded)
-        {
-            jump = true;
+			// kill when hitting player that is not dead
+			if (Knife.KnifeTarget != null && !Knife.KnifeTarget.dead)
+			{
+				scoreCounter.AddScore(Knife.KnifeTarget.scoreValue);
+				Knife.KnifeTarget.Kill();
+			}
         }
 	}
 
@@ -104,9 +106,8 @@ public class PlayerControl : MonoBehaviour
 			Flip();
 
 		// If the player should jump...
-		if(jump)
+		if(isJumping)
 		{
-			//Debug.Log("Jump");
 			// Set the Jump animator trigger parameter.
             anim.SetBool("Jump", true);
 
@@ -118,7 +119,7 @@ public class PlayerControl : MonoBehaviour
 			rigidbody2D.AddForce(new Vector2(0f, jumpForce));
 
 			// Make sure the player can't jump again until the jump conditions from Update are satisfied.
-			jump = false;
+			isJumping = false;
 		}
 
 	}

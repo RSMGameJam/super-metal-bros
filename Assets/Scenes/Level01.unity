@@ -3102,7 +3102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingRight: 1
-  jump: 0
+  isJumping: 0
   moveForce: 50
   maxSpeed: 5
   jumpClips:
@@ -3572,7 +3572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingRight: 1
-  jump: 0
+  isJumping: 0
   moveForce: 365
   maxSpeed: 5
   jumpClips: []
@@ -7656,7 +7656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingRight: 1
-  jump: 0
+  isJumping: 0
   moveForce: 50
   maxSpeed: 5
   jumpClips:
