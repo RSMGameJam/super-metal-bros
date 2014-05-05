@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CerealLerpEvent<T> : ICerealEvent {
 
-	protected ITimeProvider timeProvider = new DefaultTimeProvider();
+	protected ITimeProvider timeProvider;
 
 	public delegate T LerpProvider(T pFrom, T pTo, float pProgress);
 
@@ -17,7 +17,18 @@ public class CerealLerpEvent<T> : ICerealEvent {
 	private float _duration;
 	float _progress;
 
-	float _startTime;
+	float __startTime;
+	float _startTime {
+		get
+		{
+			return __startTime;
+		}
+		set
+		{
+			//Debug.Log("NEW START TIME: " + __startTime);
+			__startTime = value;
+		}
+	}
 
 	public CerealLerpEvent(T pFrom, T pTo, float pDuration, LerpProvider pLerp) {
 		_from = pFrom;
@@ -25,9 +36,12 @@ public class CerealLerpEvent<T> : ICerealEvent {
 		_duration = pDuration;
 		Lerp = pLerp;
 
+		timeProvider = new DefaultTimeProvider();
 		timeProvider.Update();
+
+		_progress = 0f;
 		_startTime = timeProvider.time;
-		//Debug.Log("NEW LERP");
+		//Debug.Log("LERP. startTime: " + timeProvider.time + ", progress: " + _progress);
 	}
 
 	public void Begin()
@@ -56,6 +70,7 @@ public class CerealLerpEvent<T> : ICerealEvent {
 
 	public void End()
 	{
+
 	}
 
 	public bool CheckComplete()

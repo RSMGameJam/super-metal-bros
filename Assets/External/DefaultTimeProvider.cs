@@ -15,8 +15,8 @@ public class DefaultTimeProvider : ITimeProvider {
 	{
 		_timeProvider = timeProvider;
 
-		time = _timeProvider.Invoke();
 		deltaTime = 0f;
+		time = _timeProvider.Invoke();
 	}
 
 	public void Update() {
