@@ -30,13 +30,15 @@ public class EnemyVision : MonoBehaviour
 		Debug.DrawRay(ray.origin, ray.direction.normalized * visionDistance, Color.yellow);
 
 		if(hit != null && hit.collider != null) {
-			if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player") || 
-				hit.collider.gameObject.layer == LayerMask.NameToLayer("Weapon"))
-			{
-				Player player = hit.collider.GetComponent<Player>();
+			Player player = null;
+			if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+				player = hit.collider.GetComponent<Player>();
+
+			if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Weapon"))
+				player = hit.collider.transform.parent.GetComponent<Player>();
+
 				if(player != null)
 					player.Die();
-			}
 		}
     }
 
