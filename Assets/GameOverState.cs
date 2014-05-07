@@ -8,6 +8,9 @@ public class GameOverState : MonoBehaviour {
     private Spawner[] spawners;
     private Timer timer;
 
+    public float gameEndDelay = 1f;
+    private float gameEndTimer = 0;
+
 	bool isGameOver = false;
 
 	// Use this for initialization
@@ -29,9 +32,21 @@ public class GameOverState : MonoBehaviour {
 				}
 				GameOverText.SetActiveRecursively(true);
 				isGameOver = true;
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+                foreach (GameObject pl in players)
+                {
+                    PlayerControl ctr = pl.GetComponent<PlayerControl>();
+                    if (ctr != null)
+                    {
+                        ctr.lockControls = true;
+                    }
+                }
 			}
 
-			if(Input.anyKeyDown) {
+            gameEndTimer += Time.deltaTime;
+
+			if(Input.anyKeyDown && gameEndTimer >= gameEndDelay) {
 				StateHandler.state = GameState.LEVELONE;
 			}
         }
